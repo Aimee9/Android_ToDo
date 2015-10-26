@@ -45,6 +45,8 @@ public class MainActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 addCategory();
+                mNewCategoryText.getText().clear();
+
             }
         });
 

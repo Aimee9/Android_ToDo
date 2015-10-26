@@ -1,11 +1,15 @@
 package aimee.morgan.com.todolist.ui;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import com.activeandroid.query.Delete;
 
 import java.util.ArrayList;
 
@@ -44,8 +48,20 @@ public class CategoryActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 addTask();
+                mNewTaskText.getText().clear();
             }
         });
+
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        String description = mAdapter.getItem(position);
+        Task newTask = Task.find(description);
+        newTask.delete();
+        mAdapter.remove(description);
+        mAdapter.notifyDataSetChanged();
 
     }
 

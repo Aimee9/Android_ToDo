@@ -41,4 +41,11 @@ import java.util.List;
     public static List<Task> all() {
         return new Select().from(Task.class).execute();
     }
+
+    public static Task find(String description) {
+        return new Select()
+                .from(Task.class)
+                .where("Description = ?", description)
+                .executeSingle();
+    }
 }
